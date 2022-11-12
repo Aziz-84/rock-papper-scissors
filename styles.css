@@ -1,3 +1,20 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
 h1 {
   color: red;
+}
+
+.btn {
+  font-size: 200px;
+  background-color: black;
+}
+.container-btn {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  margin-top: 10rem;
 }
