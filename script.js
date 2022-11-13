@@ -8,32 +8,33 @@ const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
 const playerSelected = document.querySelector(".playerSelected");
 const computerSelected = document.querySelector(".computerSelected");
-console.log(rock);
+const elPlayerScore = document.querySelector(".playerScore");
+const elComputerScore = document.querySelector(".computerScore");
+const elInfo = document.querySelector(".info");
 
-rock.addEventListener("click", (e) => {
+rock.addEventListener("click", () => {
+  playRound(playerSelection);
   playing = true;
-  console.log(e.target);
+  elPlayerScore.textContent = playerScore;
+  elComputerScore.textContent = computerScore;
   playerSelection = "rock ✊";
-  playRound(playerSelection);
 });
 
-paper.addEventListener("click", (e) => {
-  console.log(e.target);
+paper.addEventListener("click", () => {
+  playRound(playerSelection);
+  elPlayerScore.textContent = playerScore;
+  elComputerScore.textContent = computerScore;
   playerSelection = "paper ✋";
-  playRound(playerSelection);
 });
-scissors.addEventListener("click", (e) => {
-  console.log(e.target);
-  playerSelection = "scissors ✌️";
+scissors.addEventListener("click", () => {
   playRound(playerSelection);
+  elPlayerScore.textContent = playerScore;
+  elComputerScore.textContent = computerScore;
+  playerSelection = "scissors ✌️";
 });
 
 function playRound(playerSelection) {
-  console.log(playerSelection);
-
   computerSelection = getComputerChoice();
-  console.log(playerScore);
-  console.log(computerScore);
 
   playerSelected.textContent = "You selected" + "  " + playerSelection;
 
@@ -41,37 +42,34 @@ function playRound(playerSelection) {
 
   if (computerSelection == "rock ✊" && playerSelection == "scissors ✌️") {
     computerScore++;
-    console.log("You Lose! rock beats scissors");
+    elInfo.textContent = "You Lose! rock beats scissors";
   } else if (
     computerSelection === "scissors ✌️" &&
     playerSelection === "paper ✋"
   ) {
     computerScore++;
-    console.log("You Lose! Scissors beats Paper");
+    elInfo.textContent = "You Lose! Scissors beats Paper";
   } else if (
     computerSelection === "paper ✋" &&
     playerSelection === "rock ✊"
   ) {
     computerScore++;
-    console.log("You Lose! Paper beats Rock");
+    elInfo.textContent = "You Lose! Paper beats Rock";
   } else if (computerSelection === playerSelection) {
-    console.log("its a tie");
+    elInfo.textContent = "its a tie";
   } else {
     playerScore++;
-    console.log("You win!");
+    elInfo.textContent = "You win!";
   }
 }
 if (playerScore === 3) {
-  console.log("Player wins the game");
+  elInfo.textContent = "Player wins the game";
   playing = false;
 } else if (computerScore === 3) {
-  console.log("Game over");
-  console.log("Computer wins the game");
+  elInfo.textContent = "Game over";
+  elInfo.textContent = "Computer wins the game";
   playing = false;
 }
-
-console.log("computer scored:", computerScore);
-console.log("You scored:", playerScore);
 
 function getComputerChoice() {
   let random = Math.floor(Math.random() * 3 + 1);
