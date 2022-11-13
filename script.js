@@ -2,7 +2,7 @@ let playerSelection = "";
 let computerSelection = "";
 let playerScore = 0;
 let computerScore = 0;
-let playing = false;
+let playing = true;
 const rock = document.querySelector(".rock");
 const paper = document.querySelector(".paper");
 const scissors = document.querySelector(".scissors");
@@ -13,25 +13,43 @@ const elComputerScore = document.querySelector(".computerScore");
 const elInfo = document.querySelector(".info");
 
 rock.addEventListener("click", () => {
-  playRound(playerSelection);
-  playing = true;
-  elPlayerScore.textContent = playerScore;
-  elComputerScore.textContent = computerScore;
-  playerSelection = "rock ✊";
+  if (playing) {
+    playRound(playerSelection);
+    elPlayerScore.textContent = playerScore;
+    elComputerScore.textContent = computerScore;
+    playerSelection = "rock ✊";
+  }
+  checkScore();
 });
 
 paper.addEventListener("click", () => {
-  playRound(playerSelection);
-  elPlayerScore.textContent = playerScore;
-  elComputerScore.textContent = computerScore;
-  playerSelection = "paper ✋";
+  if (playing) {
+    playRound(playerSelection);
+    elPlayerScore.textContent = playerScore;
+    elComputerScore.textContent = computerScore;
+    playerSelection = "paper ✋";
+  }
+  checkScore();
 });
 scissors.addEventListener("click", () => {
-  playRound(playerSelection);
-  elPlayerScore.textContent = playerScore;
-  elComputerScore.textContent = computerScore;
-  playerSelection = "scissors ✌️";
+  if (playing) {
+    playRound(playerSelection);
+    elPlayerScore.textContent = playerScore;
+    elComputerScore.textContent = computerScore;
+    playerSelection = "scissors ✌️";
+  }
+  checkScore();
 });
+
+function checkScore() {
+  if (playerScore === 3) {
+    elInfo.textContent = "Game Over:Player wins the game";
+    playing = false;
+  } else if (computerScore === 3) {
+    elInfo.textContent = "Game Over: Computer wins the game";
+    playing = false;
+  }
+}
 
 function playRound(playerSelection) {
   computerSelection = getComputerChoice();
@@ -61,14 +79,6 @@ function playRound(playerSelection) {
     playerScore++;
     elInfo.textContent = "You win!";
   }
-}
-if (playerScore === 3) {
-  elInfo.textContent = "Player wins the game";
-  playing = false;
-} else if (computerScore === 3) {
-  elInfo.textContent = "Game over";
-  elInfo.textContent = "Computer wins the game";
-  playing = false;
 }
 
 function getComputerChoice() {
