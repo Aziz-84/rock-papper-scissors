@@ -11,42 +11,54 @@ const computerSelected = document.querySelector(".computerSelected");
 const elPlayerScore = document.querySelector(".playerScore");
 const elComputerScore = document.querySelector(".computerScore");
 const elInfo = document.querySelector(".info");
+const playAgainBtn = document.querySelector(".playAgain");
+
+playAgainBtn.addEventListener("click", () => {
+  playAgainBtn.classList.add("hidden");
+  playerScore = 0;
+  computerScore = 0;
+  elPlayerScore.textContent = playerScore;
+  elComputerScore.textContent = computerScore;
+  playing = true;
+});
 
 rock.addEventListener("click", () => {
   if (playing) {
+    playerSelection = "rock ✊";
     playRound(playerSelection);
     elPlayerScore.textContent = playerScore;
     elComputerScore.textContent = computerScore;
-    playerSelection = "rock ✊";
   }
   checkScore();
 });
 
 paper.addEventListener("click", () => {
   if (playing) {
+    playerSelection = "paper ✋";
     playRound(playerSelection);
     elPlayerScore.textContent = playerScore;
     elComputerScore.textContent = computerScore;
-    playerSelection = "paper ✋";
   }
   checkScore();
 });
 scissors.addEventListener("click", () => {
   if (playing) {
+    playerSelection = "scissors ✌️";
     playRound(playerSelection);
     elPlayerScore.textContent = playerScore;
     elComputerScore.textContent = computerScore;
-    playerSelection = "scissors ✌️";
   }
   checkScore();
 });
 
 function checkScore() {
-  if (playerScore === 3) {
+  if (playerScore === 5) {
     elInfo.textContent = "Game Over:Player wins the game";
     playing = false;
-  } else if (computerScore === 3) {
+    playAgainBtn.classList.remove("hidden");
+  } else if (computerScore === 5) {
     elInfo.textContent = "Game Over: Computer wins the game";
+    playAgainBtn.classList.remove("hidden");
     playing = false;
   }
 }
